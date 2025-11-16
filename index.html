@@ -1,112 +1,409 @@
-<script>
-    // --- JAVASCRIPT LOGIC ---
-
-    function clearDetails() {
-        const outputArea = document.getElementById('plan-details-output');
-        outputArea.innerHTML = '<p class="placeholder-text">Sila buat pilihan anda dari menu di atas untuk melihat butiran penuh pelan dan harga.</p>';
-        outputArea.classList.remove('active', 'popular');
-    }
-
-    function showClassSelector(selectedPlan) {
-        const classArea = document.getElementById('class-selection-area');
-        const classSelector = document.getElementById('class-selector');
-
-        clearDetails();
-
-        if (selectedPlan) {
-            classArea.style.display = 'block';
-            classSelector.value = '';
-        } else {
-            classArea.style.display = 'none';
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Sebut Harga Takaful</title>
+    
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
         }
-    }
-
-    function displayPlanDetails() {
-        const selectedPlan = document.getElementById('plan-selector').value;
-        const selectedClass = document.getElementById('class-selector').value;
-        const outputArea = document.getElementById('plan-details-output');
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+        h1, h2, h3 { color: #1a3a6b; margin-bottom: 15px; }
+        h1 {
+            text-align: center;
+            background-color: #1a3a6b;
+            color: #fff;
+            padding: 20px;
+            margin: 0;
+        }
+        section {
+            padding: 25px;
+            border-bottom: 1px solid #eee;
+        }
+        section:last-of-type { border-bottom: none; }
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        select, input[type="text"], input[type="date"] {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
         
-        clearDetails();
-
-        if (!selectedPlan || !selectedClass) {
-            return;
+        /* === PERUBAHAN CSS === */
+        /* Sembunyikan kedua-dua pemilih tambahan secara lalai */
+        #occupation-class-area, #room-class-area {
+            display: none;
         }
+        /* === TAMAT PERUBAHAN CSS === */
 
-        const dataKey = `${selectedPlan}-${selectedClass}`;
-        const planDataContainer = document.querySelector(`div[data-plan-class="${dataKey}"]`);
-
-        if (planDataContainer) {
-            const planNameOption = document.querySelector(`#plan-selector option[value="${selectedPlan}"]`).textContent;
-            const price = planDataContainer.getAttribute('data-price');
-            const isPopular = planDataContainer.getAttribute('data-popular') === 'true';
-
-            const fullPlanName = `${planNameOption} - Kelas ${selectedClass}`;
-
-            let content = `
-                <div class="plan-card ${isPopular ? 'popular' : ''}">
-                    <h2>${fullPlanName}</h2>
-                    <div class="price">${price}</div>
-                    ${planDataContainer.innerHTML}
-                    <button class="select-btn ${isPopular ? 'popular-btn' : ''}">Pilih Pelan Ini</button>
-                </div>
-            `;
-
-            outputArea.innerHTML = content;
-            outputArea.classList.add('active');
-            if (isPopular) {
-                outputArea.classList.add('popular');
-            } else {
-                outputArea.classList.remove('popular');
-            }
-        } else {
-            outputArea.innerHTML = `<p class="placeholder-text">Butiran Pelan ${dataKey} belum tersedia. Sila pilih kombinasi lain atau hubungi ejen.</p>`;
+        button {
+            background-color: #1a3a6b;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            width: 100%;
+            transition: background-color 0.3s ease;
         }
-    }
+        button:hover { background-color: #2a5a9d; }
+        #plan-details-output { margin-top: 20px; }
+        .placeholder-text {
+            color: #777;
+            font-style: italic;
+            text-align: center;
+            padding: 20px;
+            background-color: #fafafa;
+            border-radius: 5px;
+        }
+        .plan-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            background: #fff;
+        }
+        .plan-card h2 { margin-top: 0; color: #1a3a6b; }
+        .plan-card .price {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #d9534f;
+            margin-bottom: 15px;
+        }
+        .plan-card ul { padding-left: 20px; }
+        .plan-card li { margin-bottom: 8px; }
+        .plan-card.popular {
+            border: 2px solid #f0ad4e;
+            box-shadow: 0 0 10px rgba(240, 173, 78, 0.5);
+            position: relative;
+        }
+        .plan-card.popular::before {
+            content: "🔥 Popular";
+            position: absolute;
+            top: -15px;
+            right: 15px;
+            background-color: #f0ad4e;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .select-btn { margin-top: 20px; background-color: #5cb85c; }
+        .select-btn.popular-btn { background-color: #f0ad4e; color: #fff; }
+        .select-btn:hover { opacity: 0.9; }
+    </style>
+</head>
+<body>
 
-    document.addEventListener('DOMContentLoaded', () => {
-        const contactForm = document.getElementById('quickContactForm');
+    <main>
+        <h1>Kalkulator Pelan Takaful</h1>
+
+        <section class="calculator-input">
+            <h2>Pilih Pelan Anda</h2>
+            
+            <label for="plan-selector">1. Pilih Pelan Utama:</label>
+            <select id="plan-selector">
+                <option value="">-- Sila Pilih Pelan --</option>
+                <option value="medikal-asas">Pelan Medikal Asas</option>
+                <option value="medikal-hibah">Pakej Medikal + Hibah</option>
+                <option value="hibah-sahaja">Pelan Hibah Sahaja</option>
+            </select>
+
+            <div id="occupation-class-area">
+                <label for="occupation-class-selector">2. Pilih Kelas Pekerjaan:</label>
+                <select id="occupation-class-selector">
+                    <option value="">-- Sila Pilih Kelas --</option>
+                    <option value="1">Kelas 1 (Pejabat, Risiko Rendah)</option>
+                    <option value="2">Kelas 2 (Kerja Luar, Risiko Sederhana)</option>
+                    <option value="3">Kelas 3 (Kerja Manual, Risiko Tinggi)</option>
+                    <option value="4">Kelas 4 (Risiko Sangat Tinggi)</option>
+                </select>
+            </div>
+
+            <div id="room-class-area">
+                <label for="room-class-selector">3. Pilih Kelas Bilik (Medikal):</label>
+                <select id="room-class-selector">
+                    <option value="">-- Sila Pilih Kelas --</option>
+                    <option value="150">Bilik RM 150</option>
+                    <option value="200">Bilik RM 200</option>
+                    <option value="300">Bilik RM 300</option>
+                </select>
+            </div>
+        </section>
+        <section class="calculator-output">
+            <h3>Butiran Pelan Dipilih:</h3>
+            <div id="plan-details-output">
+                <p class="placeholder-text">Sila buat pilihan anda dari menu di atas untuk melihat butiran penuh pelan dan harga.</p>
+            </div>
+        </section>
+
+        <section class="contact-form">
+            <h2>Dapatkan Sebut Harga Penuh</h2>
+            <p>Isi maklumat di bawah untuk hantar butiran anda terus ke WhatsApp kami.</p>
+            <form id="quickContactForm">
+                <label for="fullName">Nama Penuh:</label>
+                <input type="text" id="fullName" name="fullName" required>
+
+                <label for="birthDate">Tarikh Lahir:</label>
+                <input type="date" id="birthDate" name="birthDate" required>
+
+                <label for="occupation">Pekerjaan:</label>
+                <input type="text" id="occupation" name="occupation" placeholder="Cth: Eksekutif Pemasaran" required>
+
+                <button type="submit">Hantar ke WhatsApp</button>
+            </form>
+        </section>
+        </main>
+
+    <div id="plan-data-storage" style="display: none;">
+
+        <div data-plan-key="medikal-asas-1-150" data-price="RM 120 / bulan" data-popular="false">
+            <ul><li>Had Tahunan: RM 150,000</li><li>Bilik & Penginapan: RM 150</li><li>Tiada Ko-Takaful</li></ul>
+        </div>
+        <div data-plan-key="medikal-asas-1-200" data-price="RM 150 / bulan" data-popular="false">
+            <ul><li>Had Tahunan: RM 200,000</li><li>Bilik & Penginapan: RM 200</li><li>Tiada Ko-Takaful</li></ul>
+        </div>
+        <div data-plan-key="medikal-asas-2-150" data-price="RM 135 / bulan" data-popular="false">
+            <ul><li>Had Tahunan: RM 150,000</li><li>Bilik & Penginapan: RM 150</li><li>Tiada Ko-Takaful</li></ul>
+        </div>
+        <div data-plan-key="medikal-asas-2-200" data-price="RM 165 / bulan" data-popular="false">
+            <ul><li>Had Tahunan: RM 200,000</li><li>Bilik & Penginapan: RM 200</li><li>Tiada Ko-Takaful</li></ul>
+        </div>
+
+
+        <div data-plan-key="medikal-hibah-1-200" data-price="RM 250 / bulan" data-popular="true">
+            <ul><li>Had Tahunan Medikal: RM 1,000,000</li><li>Bilik & Penginapan: RM 200</li><li>Perlindungan Hibah: RM 200,000</li><li>Elaun Hospital (RM 100/hari)</li></ul>
+        </div>
+        <div data-plan-key="medikal-hibah-2-200" data-price="RM 280 / bulan" data-popular="true">
+            <ul><li>Had Tahunan Medikal: RM 1,000,000</li><li>Bilik & Penginapan: RM 200</li><li>Perlindungan Hibah: RM 200,000</li><li>Elaun Hospital (RM 100/hari)</li></ul>
+        </div>
         
-        const myWhatsAppNumber = '601125517767';
 
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
+        <div data-plan-key="hibah-sahaja-1" data-price="Mula RM 100 / bulan" data-popular="false">
+            <ul><li>Perlindungan Hibah Asas: RM 250,000</li><li>Manfaat Kematian & Hilang Upaya Penuh (TPD)</li><li>(Harga untuk Kelas 1)</li></ul>
+        </div>
+        <div data-plan-key="hibah-sahaja-2" data-price="Mula RM 120 / bulan" data-popular="false">
+            <ul><li>Perlindungan Hibah Asas: RM 250,000</li><li>Manfaat Kematian & Hilang Upaya Penuh (TPD)</li><li>(Harga untuk Kelas 2)</li></ul>
+        </div>
+        <div data-plan-key="hibah-sahaja-3" data-price="Mula RM 150 / bulan" data-popular="false">
+            <ul><li>Perlindungan Hibah Asas: RM 250,000</li><li>Manfaat Kematian & Hilang Upaya Penuh (TPD)</li><li>(Harga untuk Kelas 3)</li></ul>
+        </div>
+    </div>
 
-            const name = document.getElementById('fullName').value;
-            const dob = document.getElementById('birthDate').value;
-            const occupation = document.getElementById('occupation').value;
 
-            // Ambil nilai Pelan & Kelas
+    <script>
+        // --- JAVASCRIPT LOGIC ---
+
+        function clearDetails() {
+            const outputArea = document.getElementById('plan-details-output');
+            outputArea.innerHTML = '<p class="placeholder-text">Sila buat pilihan anda dari menu di atas untuk melihat butiran penuh pelan dan harga.</p>';
+            outputArea.classList.remove('active', 'popular'); 
+        }
+
+        // Fungsi baharu untuk mengawal paparan input
+        function updateInputVisibility() {
             const selectedPlan = document.getElementById('plan-selector').value;
-            const selectedClass = document.getElementById('class-selector').value;
+            const occArea = document.getElementById('occupation-class-area');
+            const roomArea = document.getElementById('room-class-area');
+            
+            // Reset pilihan bawahan
+            document.getElementById('occupation-class-selector').value = '';
+            document.getElementById('room-class-selector').value = '';
 
-            let planDetails = "";
+            if (!selectedPlan) {
+                // Tiada pelan dipilih, sembunyikan semua
+                occArea.style.display = 'none';
+                roomArea.style.display = 'none';
+            } else {
+                // Pelan telah dipilih, SENTIASA tunjukkan Kelas Pekerjaan
+                occArea.style.display = 'block';
+                
+                if (selectedPlan === 'hibah-sahaja') {
+                    // Jika Hibah, SEMBUNYIKAN bilik
+                    roomArea.style.display = 'none';
+                } else {
+                    // Jika Medikal, TUNJUKKAN bilik
+                    roomArea.style.display = 'block';
+                }
+            }
+            // Kosongkan butiran sedia ada
+            clearDetails();
+        }
 
-            if (selectedPlan) {
-                const planNameOption = document.querySelector(`#plan-selector option[value="${selectedPlan}"]`).textContent;
-                planDetails = `Pilihan Pelan: ${planNameOption}`;
-                if (selectedClass) {
-                    planDetails += ` (Kelas ${selectedClass})`;
+        // Fungsi displayPlanDetails kini membaca semua 3 (atau 2) input
+        function displayPlanDetails() {
+            const selectedPlan = document.getElementById('plan-selector').value;
+            const selectedOccClass = document.getElementById('occupation-class-selector').value;
+            const selectedRoomClass = document.getElementById('room-class-selector').value;
+            const outputArea = document.getElementById('plan-details-output');
+            
+            clearDetails();
+
+            let dataKey = "";
+            let fullPlanName = "";
+            let planNameOption = null;
+
+            if (!selectedPlan) {
+                return; // Tunjuk placeholder
+            }
+            
+            planNameOption = document.querySelector(`#plan-selector option[value="${selectedPlan}"]`).textContent;
+
+            // Perlu sekurang-kurangnya Pelan dan Kelas Pekerjaan
+            if (!selectedOccClass) {
+                outputArea.innerHTML = `<p class="placeholder-text">Sila pilih Kelas Pekerjaan anda.</p>`;
+                return;
+            }
+
+            if (selectedPlan === 'hibah-sahaja') {
+                // Logik untuk Hibah Sahaja (Pelan + Kelas Pekerjaan)
+                dataKey = `${selectedPlan}-${selectedOccClass}`;
+                fullPlanName = `${planNameOption} (Kelas ${selectedOccClass})`;
+            } else {
+                // Logik untuk pelan medikal (Pelan + Kelas Pekerjaan + Kelas Bilik)
+                if (!selectedRoomClass) {
+                    outputArea.innerHTML = `<p class="placeholder-text">Sila pilih kelas bilik untuk melihat butiran.</p>`;
+                    return;
+                }
+                dataKey = `${selectedPlan}-${selectedOccClass}-${selectedRoomClass}`;
+                fullPlanName = `${planNameOption} (Kelas ${selectedOccClass}) - Bilik RM ${selectedRoomClass}`;
+            }
+
+            // Cari data menggunakan kunci yang dibina
+            const planDataContainer = document.querySelector(`div[data-plan-key="${dataKey}"]`);
+
+            if (planDataContainer) {
+                const price = planDataContainer.getAttribute('data-price');
+                const isPopular = planDataContainer.getAttribute('data-popular') === 'true';
+
+                let content = `
+                    <div class="plan-card ${isPopular ? 'popular' : ''}">
+                        <h2>${fullPlanName}</h2>
+                        <div class="price">${price}</div>
+                        ${planDataContainer.innerHTML}
+                        <button classs="select-btn ${isPopular ? 'popular-btn' : ''}">Pilih Pelan Ini</button>
+                    </div>
+                `;
+
+                outputArea.innerHTML = content;
+                outputArea.classList.add('active');
+                if (isPopular) {
+                    outputArea.classList.add('popular');
                 }
             } else {
-                planDetails = "Tiada pilihan pelan dibuat.";
+                // Data tidak dijumpai
+                outputArea.innerHTML = `<p class="placeholder-text">Butiran Pelan untuk kombinasi ini (${dataKey}) belum tersedia. Sila hubungi ejen.</p>`;
             }
+        }
 
-            // --- Mesej WhatsApp CLEAN TANPA %0A BERTABUR ---
-            const message =
-                "Salam.\n\n" +
-                `Saya *${name}* berminat dengan pelan Takaful.\n\n` +
-                "*Maklumat Saya:*\n" +
-                `Tarikh Lahir: ${dob}\n` +
-                `Pekerjaan: ${occupation}\n` +
-                `${planDetails}\n\n` +
-                "Harap dapat hubungi saya segera. Terima kasih.";
 
-            const encodedMessage = encodeURIComponent(message);
+        document.addEventListener('DOMContentLoaded', () => {
+            const contactForm = document.getElementById('quickContactForm');
+            
+            // Dapatkan semua pemilih
+            const planSelector = document.getElementById('plan-selector');
+            const occClassSelector = document.getElementById('occupation-class-selector');
+            const roomClassSelector = document.getElementById('room-class-selector');
 
-            const whatsappURL = `https://wa.me/${myWhatsAppNumber}?text=${encodedMessage}`;
-            window.open(whatsappURL, '_blank');
+            // 1. Apabila Pelan ditukar
+            planSelector.addEventListener('change', () => {
+                updateInputVisibility();
+                // Jika ia hibah, ia tidak akan memaparkan apa-apa sehingga kelas occ dipilih
+                // Jika ia medikal, ia tidak akan memaparkan apa-apa sehingga kedua-dua kelas occ & bilik dipilih
+                displayPlanDetails(); 
+            });
 
-            contactForm.reset();
+            // 2. Apabila Kelas Pekerjaan ditukar
+            occClassSelector.addEventListener('change', displayPlanDetails);
+
+            // 3. Apabila Kelas Bilik ditukar
+            roomClassSelector.addEventListener('change', displayPlanDetails);
+
+
+            const myWhatsAppNumber = '601125517767'; // Gantikan dengan nombor WA anda
+
+            // === BORANG WHATSAPP DIUBAH SUAI (Baca dari input kalkulator) ===
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const name = document.getElementById('fullName').value;
+                const dob = document.getElementById('birthDate').value;
+                const occupation = document.getElementById('occupation').value;
+                
+                // Ambil nilai dari pemilih di ATAS
+                const selectedOccClass = occClassSelector.value;
+                const selectedPlan = planSelector.value;
+                const selectedRoomClass = roomClassSelector.value;
+
+                let planDetails = "Tiada pilihan pelan dibuat.";
+                
+                if (selectedPlan) {
+                    const planNameOption = document.querySelector(`#plan-selector option[value="${selectedPlan}"]`).textContent;
+                    
+                    if (!selectedOccClass) {
+                        planDetails = `Pelan: ${planNameOption} (Kelas Pekerjaan belum dipilih)`;
+                    }
+                    else if (selectedPlan === 'hibah-sahaja') {
+                        planDetails = `Pilihan Pelan: ${planNameOption} (Kelas ${selectedOccClass})`;
+                    } 
+                    else if (selectedRoomClass) {
+                        planDetails = `Pilihan Pelan: ${planNameOption} (Kelas ${selectedOccClass}) - Bilik RM ${selectedRoomClass}`;
+                    }
+                    else {
+                        planDetails = `Pilihan Pelan: ${planNameOption} (Kelas ${selectedOccClass}) - (Bilik belum dipilih)`;
+                    }
+                }
+                
+                const message = `Salam.
+
+Saya *${name}* berminat dengan pelan Takaful.
+
+*Maklumat Saya:*
+Tarikh Lahir: ${dob}
+Pekerjaan: ${occupation}
+Kelas Pekerjaan: ${selectedOccClass || 'Belum dinyatakan'}
+
+*Pelan Dipilih:*
+${planDetails}
+
+Harap dapat hubungi saya segera. Terima kasih.`;
+
+
+                const encodedMessage = encodeURIComponent(message);
+                const whatsappURL = `https://wa.me/${myWhatsAppNumber}?text=${encodedMessage}`;
+                window.open(whatsappURL, '_blank');
+
+                contactForm.reset();
+                // Reset pemilih utama
+                planSelector.value = '';
+                updateInputVisibility();
+                clearDetails();
+            });
         });
-    });
-</script>
+    </script>
+
+</body>
+</html>
