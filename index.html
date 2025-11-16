@@ -50,12 +50,9 @@
             font-size: 16px;
         }
         
-        /* === PERUBAHAN CSS === */
-        /* Sembunyikan kedua-dua pemilih tambahan secara lalai */
         #occupation-class-area, #room-class-area {
             display: none;
         }
-        /* === TAMAT PERUBAHAN CSS === */
 
         button {
             background-color: #1a3a6b;
@@ -119,8 +116,6 @@
 <body>
 
     <main>
-        <h1>Kalkulator Pelan Takaful</h1>
-
         <section class="calculator-input">
             <h2>Pilih Pelan Anda</h2>
             
@@ -153,6 +148,7 @@
                 </select>
             </div>
         </section>
+
         <section class="calculator-output">
             <h3>Butiran Pelan Dipilih:</h3>
             <div id="plan-details-output">
@@ -166,94 +162,138 @@
             <form id="quickContactForm">
                 <label for="fullName">Nama Penuh:</label>
                 <input type="text" id="fullName" name="fullName" required>
-
                 <label for="birthDate">Tarikh Lahir:</label>
                 <input type="date" id="birthDate" name="birthDate" required>
-
                 <label for="occupation">Pekerjaan:</label>
                 <input type="text" id="occupation" name="occupation" placeholder="Cth: Eksekutif Pemasaran" required>
-
                 <button type="submit">Hantar ke WhatsApp</button>
             </form>
         </section>
-        </main>
+    </main>
 
     <div id="plan-data-storage" style="display: none;">
 
-        <div data-plan-key="medikal-asas-1-150" data-price="RM 120 / bulan" data-popular="false">
+        <div data-plan-key="medikal-asas-1-150" data-price="RM 120 - RM 140 / bulan" data-popular="false">
             <ul><li>Had Tahunan: RM 150,000</li><li>Bilik & Penginapan: RM 150</li><li>Tiada Ko-Takaful</li></ul>
         </div>
-        <div data-plan-key="medikal-asas-1-200" data-price="RM 150 / bulan" data-popular="false">
+        <div data-plan-key="medikal-asas-1-200" data-price="RM 140 - RM 160 / bulan" data-popular="false">
             <ul><li>Had Tahunan: RM 200,000</li><li>Bilik & Penginapan: RM 200</li><li>Tiada Ko-Takaful</li></ul>
         </div>
-        <div data-plan-key="medikal-asas-2-150" data-price="RM 135 / bulan" data-popular="false">
+        <div data-plan-key="medikal-asas-1-300" data-price="RM 160 - RM 180 / bulan" data-popular="false">
+            <ul><li>Had Tahunan: RM 300,000</li><li>Bilik & Penginapan: RM 300</li><li>Tiada Ko-Takaful</li></ul>
+        </div>
+        <div data-plan-key="medikal-asas-2-150" data-price="RM 135 - RM 155 / bulan" data-popular="false">
             <ul><li>Had Tahunan: RM 150,000</li><li>Bilik & Penginapan: RM 150</li><li>Tiada Ko-Takaful</li></ul>
         </div>
-        <div data-plan-key="medikal-asas-2-200" data-price="RM 165 / bulan" data-popular="false">
+        <div data-plan-key="medikal-asas-2-200" data-price="RM 155 - RM 175 / bulan" data-popular="false">
             <ul><li>Had Tahunan: RM 200,000</li><li>Bilik & Penginapan: RM 200</li><li>Tiada Ko-Takaful</li></ul>
         </div>
-
-
-        <div data-plan-key="medikal-hibah-1-200" data-price="RM 250 / bulan" data-popular="true">
-            <ul><li>Had Tahunan Medikal: RM 1,000,000</li><li>Bilik & Penginapan: RM 200</li><li>Perlindungan Hibah: RM 200,000</li><li>Elaun Hospital (RM 100/hari)</li></ul>
+        <div data-plan-key="medikal-asas-2-300" data-price="RM 175 - RM 195 / bulan" data-popular="false">
+            <ul><li>Had Tahunan: RM 300,000</li><li>Bilik & Penginapan: RM 300</li><li>Tiada Ko-Takaful</li></ul>
         </div>
-        <div data-plan-key="medikal-hibah-2-200" data-price="RM 280 / bulan" data-popular="true">
-            <ul><li>Had Tahunan Medikal: RM 1,000,000</li><li>Bilik & Penginapan: RM 200</li><li>Perlindungan Hibah: RM 200,000</li><li>Elaun Hospital (RM 100/hari)</li></ul>
+        <div data-plan-key="medikal-asas-3-150" data-price="RM 160 - RM 190 / bulan" data-popular="false">
+            <ul><li>Had Tahunan: RM 150,000</li><li>Bilik & Penginapan: RM 150</li><li>Tiada Ko-Takaful</li></ul>
         </div>
+        <div data-plan-key="medikal-asas-3-200" data-price="RM 180 - RM 210 / bulan" data-popular="false">
+            <ul><li>Had Tahunan: RM 200,000</li><li>Bilik & Penginapan: RM 200</li><li>Tiada Ko-Takaful</li></ul>
+        </div>
+        <div data-plan-key="medikal-asas-3-300" data-price="RM 200 - RM 230 / bulan" data-popular="false">
+            <ul><li>Had Tahunan: RM 300,000</li><li>Bilik & Penginapan: RM 300</li><li>Tiada Ko-Takaful</li></ul>
+        </div>
+        <div data-plan-key="medikal-asas-4-150" data-price="RM 250 - RM 300 / bulan" data-popular="false">
+            <ul><li>Had Tahunan: RM 150,000</li><li>Bilik & Penginapan: RM 150</li><li>Tiada Ko-Takaful</li><li>(Tertakluk kepada kelulusan)</li></ul>
+        </div>
+        <div data-plan-key="medikal-asas-4-200" data-price="RM 270 - RM 320 / bulan" data-popular="false">
+            <ul><li>Had Tahunan: RM 200,000</li><li>Bilik & Penginapan: RM 200</li><li>Tiada Ko-Takaful</li><li>(Tertakluk kepada kelulusan)</li></ul>
+        </div>
+        <div data-plan-key="medikal-asas-4-300" data-price="RM 290 - RM 340 / bulan" data-popular="false">
+            <ul><li>Had Tahunan: RM 300,000</li><li>Bilik & Penginapan: RM 300</li><li>Tiada Ko-Takaful</li><li>(Tertakluk kepada kelulusan)</li></ul>
+        </div>
+
+        <div data-plan-key="medikal-hibah-1-150" data-price="RM 200 - RM 230 / bulan" data-popular="false">
+            <ul><li>Medikal (Bilik RM 150) + Hibah RM 100k</li><li>Manfaat Penyakit Kritikal</li></ul>
+        </div>
+        <div data-plan-key="medikal-hibah-1-200" data-price="RM 230 - RM 260 / bulan" data-popular="true">
+            <ul><li>Medikal (Bilik RM 200) + Hibah RM 150k</li><li>Manfaat Penyakit Kritikal</li><li>Elaun Hospital</li></ul>
+        </div>
+        <div data-plan-key="medikal-hibah-1-300" data-price="RM 260 - RM 290 / bulan" data-popular="false">
+            <ul><li>Medikal (Bilik RM 300) + Hibah RM 200k</li><li>Manfaat Penyakit Kritikal</li><li>Elaun Hospital</li></ul>
+        </div>
+        <div data-plan-key="medikal-hibah-2-150" data-price="RM 240 - RM 270 / bulan" data-popular="false">
+            <ul><li>Medikal (Bilik RM 150) + Hibah RM 100k</li><li>Manfaat Penyakit Kritikal</li></ul>
+        </div>
+        <div data-plan-key="medikal-hibah-2-200" data-price="RM 270 - RM 300 / bulan" data-popular="true">
+            <ul><li>Medikal (Bilik RM 200) + Hibah RM 150k</li><li>Manfaat Penyakit Kritikal</li><li>Elaun Hospital</li></ul>
+        </div>
+        <div data-plan-key="medikal-hibah-2-300" data-price="RM 300 - RM 330 / bulan" data-popular="false">
+            <ul><li>Medikal (Bilik RM 300) + Hibah RM 200k</li><li>Manfaat Penyakit Kritikal</li><li>Elaun Hospital</li></ul>
+        </div>
+        <div data-plan-key="medikal-hibah-3-150" data-price="RM 310 - RM 350 / bulan" data-popular="false">
+            <ul><li>Medikal (Bilik RM 150) + Hibah RM 100k</li><li>Manfaat Penyakit Kritikal</li></ul>
+        </div>
+        <div data-plan-key="medikal-hibah-3-200" data-price="RM 340 - RM 380 / bulan" data-popular="false">
+            <ul><li>Medikal (Bilik RM 200) + Hibah RM 150k</li><li>Manfaat Penyakit Kritikal</li></ul>
+        </div>
+        <div data-plan-key="medikal-hibah-3-300" data-price="RM 370 - RM 410 / bulan" data-popular="false">
+            <ul><li>Medikal (Bilik RM 300) + Hibah RM 200k</li><li>Manfaat Penyakit Kritikal</li></ul>
+        </div>
+        <div data-plan-key="medikal-hibah-4-150" data-price="RM 450 - RM 500 / bulan" data-popular="false">
+            <ul><li>Medikal (Bilik RM 150) + Hibah (Perlu Semakan)</li><li>(Tertakluk kepada kelulusan)</li></ul>
+        </div>
+        <div data-plan-key="medikal-hibah-4-200" data-price="RM 480 - RM 530 / bulan" data-popular="false">
+            <ul><li>Medikal (Bilik RM 200) + Hibah (Perlu Semakan)</li><li>(Tertakluk kepada kelulusan)</li></ul>
+        </div>
+        <div data-plan-key="medikal-hibah-4-300" data-price="RM 510 - RM 560 / bulan" data-popular="false">
+            <ul><li>Medikal (Bilik RM 300) + Hibah (Perlu Semakan)</li><li>(Tertakluk kepada kelulusan)</li></ul>
+        </div>
+
         
+        <div data-plan-key="hibah-sahaja-1" data-price="RM 80 - RM 110 / bulan" data-popular="false">
+            <ul><li>Perlindungan Hibah Asas: RM 250,000</li><li>Manfaat Kematian & Hilang Upaya Penuh (TPD)</li><li>(Anggaran untuk Kelas 1)</li></ul>
+        </div>
+        <div data-plan-key="hibah-sahaja-2" data-price="RM 100 - RM 130 / bulan" data-popular="false">
+            <ul><li>Perlindungan Hibah Asas: RM 250,000</li><li>Manfaat Kematian & Hilang Upaya Penuh (TPD)</li><li>(Anggaran untuk Kelas 2)</li></ul>
+        </div>
+        <div data-plan-key="hibah-sahaja-3" data-price="RM 130 - RM 160 / bulan" data-popular="false">
+            <ul><li>Perlindungan Hibah Asas: RM 250,000</li><li>Manfaat Kematian & Hilang Upaya Penuh (TPD)</li><li>(Anggaran untuk Kelas 3)</li></ul>
+        </div>
+        <div data-plan-key="hibah-sahaja-4" data-price="RM 200 - RM 250+ / bulan" data-popular="false">
+            <ul><li>Perlindungan Hibah Asas: RM 150,000 (Mungkin dikurangkan)</li><li>Manfaat Kematian & Hilang Upaya Penuh (TPD)</li><li>(Anggaran untuk Kelas 4, Perlu Semakan)</li></ul>
+        </div>
 
-        <div data-plan-key="hibah-sahaja-1" data-price="Mula RM 100 / bulan" data-popular="false">
-            <ul><li>Perlindungan Hibah Asas: RM 250,000</li><li>Manfaat Kematian & Hilang Upaya Penuh (TPD)</li><li>(Harga untuk Kelas 1)</li></ul>
-        </div>
-        <div data-plan-key="hibah-sahaja-2" data-price="Mula RM 120 / bulan" data-popular="false">
-            <ul><li>Perlindungan Hibah Asas: RM 250,000</li><li>Manfaat Kematian & Hilang Upaya Penuh (TPD)</li><li>(Harga untuk Kelas 2)</li></ul>
-        </div>
-        <div data-plan-key="hibah-sahaja-3" data-price="Mula RM 150 / bulan" data-popular="false">
-            <ul><li>Perlindungan Hibah Asas: RM 250,000</li><li>Manfaat Kematian & Hilang Upaya Penuh (TPD)</li><li>(Harga untuk Kelas 3)</li></ul>
-        </div>
     </div>
 
 
     <script>
-        // --- JAVASCRIPT LOGIC ---
-
         function clearDetails() {
             const outputArea = document.getElementById('plan-details-output');
             outputArea.innerHTML = '<p class="placeholder-text">Sila buat pilihan anda dari menu di atas untuk melihat butiran penuh pelan dan harga.</p>';
             outputArea.classList.remove('active', 'popular'); 
         }
 
-        // Fungsi baharu untuk mengawal paparan input
         function updateInputVisibility() {
             const selectedPlan = document.getElementById('plan-selector').value;
             const occArea = document.getElementById('occupation-class-area');
             const roomArea = document.getElementById('room-class-area');
             
-            // Reset pilihan bawahan
             document.getElementById('occupation-class-selector').value = '';
             document.getElementById('room-class-selector').value = '';
 
             if (!selectedPlan) {
-                // Tiada pelan dipilih, sembunyikan semua
                 occArea.style.display = 'none';
                 roomArea.style.display = 'none';
             } else {
-                // Pelan telah dipilih, SENTIASA tunjukkan Kelas Pekerjaan
                 occArea.style.display = 'block';
                 
                 if (selectedPlan === 'hibah-sahaja') {
-                    // Jika Hibah, SEMBUNYIKAN bilik
                     roomArea.style.display = 'none';
                 } else {
-                    // Jika Medikal, TUNJUKKAN bilik
                     roomArea.style.display = 'block';
                 }
             }
-            // Kosongkan butiran sedia ada
             clearDetails();
         }
 
-        // Fungsi displayPlanDetails kini membaca semua 3 (atau 2) input
         function displayPlanDetails() {
             const selectedPlan = document.getElementById('plan-selector').value;
             const selectedOccClass = document.getElementById('occupation-class-selector').value;
@@ -266,24 +306,19 @@
             let fullPlanName = "";
             let planNameOption = null;
 
-            if (!selectedPlan) {
-                return; // Tunjuk placeholder
-            }
+            if (!selectedPlan) { return; }
             
             planNameOption = document.querySelector(`#plan-selector option[value="${selectedPlan}"]`).textContent;
 
-            // Perlu sekurang-kurangnya Pelan dan Kelas Pekerjaan
             if (!selectedOccClass) {
                 outputArea.innerHTML = `<p class="placeholder-text">Sila pilih Kelas Pekerjaan anda.</p>`;
                 return;
             }
 
             if (selectedPlan === 'hibah-sahaja') {
-                // Logik untuk Hibah Sahaja (Pelan + Kelas Pekerjaan)
                 dataKey = `${selectedPlan}-${selectedOccClass}`;
                 fullPlanName = `${planNameOption} (Kelas ${selectedOccClass})`;
             } else {
-                // Logik untuk pelan medikal (Pelan + Kelas Pekerjaan + Kelas Bilik)
                 if (!selectedRoomClass) {
                     outputArea.innerHTML = `<p class="placeholder-text">Sila pilih kelas bilik untuk melihat butiran.</p>`;
                     return;
@@ -292,21 +327,22 @@
                 fullPlanName = `${planNameOption} (Kelas ${selectedOccClass}) - Bilik RM ${selectedRoomClass}`;
             }
 
-            // Cari data menggunakan kunci yang dibina
             const planDataContainer = document.querySelector(`div[data-plan-key="${dataKey}"]`);
 
             if (planDataContainer) {
                 const price = planDataContainer.getAttribute('data-price');
                 const isPopular = planDataContainer.getAttribute('data-popular') === 'true';
 
+                // === PEMBETULAN TYPO DI SINI (classs -> class) ===
                 let content = `
                     <div class="plan-card ${isPopular ? 'popular' : ''}">
                         <h2>${fullPlanName}</h2>
                         <div class="price">${price}</div>
                         ${planDataContainer.innerHTML}
-                        <button classs="select-btn ${isPopular ? 'popular-btn' : ''}">Pilih Pelan Ini</button>
+                        <button class="select-btn ${isPopular ? 'popular-btn' : ''}">Pilih Pelan Ini</button>
                     </div>
                 `;
+                // === TAMAT PEMBETULAN ===
 
                 outputArea.innerHTML = content;
                 outputArea.classList.add('active');
@@ -314,7 +350,6 @@
                     outputArea.classList.add('popular');
                 }
             } else {
-                // Data tidak dijumpai
                 outputArea.innerHTML = `<p class="placeholder-text">Butiran Pelan untuk kombinasi ini (${dataKey}) belum tersedia. Sila hubungi ejen.</p>`;
             }
         }
@@ -323,29 +358,20 @@
         document.addEventListener('DOMContentLoaded', () => {
             const contactForm = document.getElementById('quickContactForm');
             
-            // Dapatkan semua pemilih
             const planSelector = document.getElementById('plan-selector');
             const occClassSelector = document.getElementById('occupation-class-selector');
             const roomClassSelector = document.getElementById('room-class-selector');
 
-            // 1. Apabila Pelan ditukar
             planSelector.addEventListener('change', () => {
                 updateInputVisibility();
-                // Jika ia hibah, ia tidak akan memaparkan apa-apa sehingga kelas occ dipilih
-                // Jika ia medikal, ia tidak akan memaparkan apa-apa sehingga kedua-dua kelas occ & bilik dipilih
                 displayPlanDetails(); 
             });
 
-            // 2. Apabila Kelas Pekerjaan ditukar
             occClassSelector.addEventListener('change', displayPlanDetails);
-
-            // 3. Apabila Kelas Bilik ditukar
             roomClassSelector.addEventListener('change', displayPlanDetails);
-
 
             const myWhatsAppNumber = '601125517767'; // Gantikan dengan nombor WA anda
 
-            // === BORANG WHATSAPP DIUBAH SUAI (Baca dari input kalkulator) ===
             contactForm.addEventListener('submit', (e) => {
                 e.preventDefault();
 
@@ -353,7 +379,6 @@
                 const dob = document.getElementById('birthDate').value;
                 const occupation = document.getElementById('occupation').value;
                 
-                // Ambil nilai dari pemilih di ATAS
                 const selectedOccClass = occClassSelector.value;
                 const selectedPlan = planSelector.value;
                 const selectedRoomClass = roomClassSelector.value;
@@ -391,13 +416,11 @@ ${planDetails}
 
 Harap dapat hubungi saya segera. Terima kasih.`;
 
-
                 const encodedMessage = encodeURIComponent(message);
                 const whatsappURL = `https://wa.me/${myWhatsAppNumber}?text=${encodedMessage}`;
                 window.open(whatsappURL, '_blank');
 
                 contactForm.reset();
-                // Reset pemilih utama
                 planSelector.value = '';
                 updateInputVisibility();
                 clearDetails();
