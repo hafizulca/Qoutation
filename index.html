@@ -59,13 +59,13 @@
             transform-origin:right center; 
             border-radius:8px; 
         }
-        .side.top    { 
+        .side.top     { 
             height:var(--thk); 
             width:100%; 
             left:0;  
             top:0; 
             transform: rotateX( 90deg) translateZ(calc(50% - var(--thk)/2)); 
-            transform-origin:center top;   
+            transform-origin:center top;    
             border-radius:8px; 
             background: linear-gradient(90deg,#e5e7eb,#cbd5e1 60%,#94a3b8); 
         }
@@ -276,11 +276,11 @@
         </button>
 
         <ul id="menu" class="hidden lg:flex items-center gap-6 text-sm">
-            <li><a class="hover:text-sky-600" href="#kalkulator">Pelan</a></li>
+            <li><a class="hover:text-sky-600" href="#sebutharga">Pelan</a></li>
             <li><a class="hover:text-sky-600" href="#manfaat">Manfaat</a></li>
             <li><a class="hover:text-sky-600" href="#soalan">FAQ</a></li>
             <li><a class="hover:text-sky-600" href="#hubungi">Hubungi</a></li>
-            <li><a class="px-4 py-2 rounded-xl bg-sky-600 text-white hover:bg-sky-700" href="#kalkulator">Dapatkan Sebut Harga</a></li>
+            <li><a class="px-4 py-2 rounded-xl bg-sky-600 text-white hover:bg-sky-700" href="#sebutharga">Dapatkan Sebut Harga</a></li>
         </ul>
     </nav>
 </header>
@@ -292,14 +292,14 @@
             <h1 class="text-3xl md:text-5xl font-bold leading-tight text-slate-900">Perlindungan perubatan & kewangan untuk keluarga — jelas, mudah, telus.</h1>
             <p class="mt-4 text-slate-700 md:text-lg">Semak pelan terbaik ikut bajet dan keperluan. Kami bantu dari A sampai Z — dari penerangan, pendaftaran, hingga tuntutan.</p>
             <div class="mt-6 flex flex-wrap gap-3">
-                <a href="#kalkulator" class="px-5 py-3 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700">Lihat Pelan</a>
+                <a href="#sebutharga" class="px-5 py-3 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700">Lihat Pelan</a>
                 <a href="https://wa.me/601125517767" target="_blank" rel="noopener" class="px-5 py-3 rounded-xl border border-slate-300 hover:border-slate-400">WhatsApp Sekarang</a>
             </div>
         </div>
     </div>
 </section>
 
-<section id="kalkulator" class="py-16 md:py-20 bg-slate-50">
+<section id="sebutharga" class="py-16 md:py-20 bg-slate-50">
     <div class="container mx-auto px-4">
         <div class="max-w-4xl mx-auto">
             <div class="text-center mb-10">
@@ -1139,7 +1139,7 @@ Harap dapat hubungi saya segera. Terima kasih.`;
     });
 
     // 3D Card Functionality
-    const badge    = document.getElementById('bc-badge');
+    const badge     = document.getElementById('bc-badge');
     const overlay = document.getElementById('bc-overlay');
     const modal   = document.getElementById('bc-modal');
     const closeX  = document.getElementById('bc-close');
@@ -1219,7 +1219,7 @@ Harap dapat hubungi saya segera. Terima kasih.`;
     }
     window.addEventListener('mousemove', move); 
     window.addEventListener('touchmove', move, {passive:true});
-    window.addEventListener('mouseup', up);   
+    window.addEventListener('mouseup', up);    
     window.addEventListener('touchend', up);
 
     if (btnFlip) btnFlip.addEventListener('click', ()=>{ flipped=!flipped; render(); });
