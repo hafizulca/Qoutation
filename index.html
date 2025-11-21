@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prudential Takaful - Perlindungan Keluarga Anda</title>
-     
+    
     <script src="https://cdn.tailwindcss.com"></script>
-     
+    
     <style>
         /* ================= Kad 3D berisi (extruded) ================= */
         :root { --thk: 14px; }
@@ -41,7 +41,7 @@
             background: linear-gradient(180deg,#e5e7eb,#cbd5e1 60%,#94a3b8); 
             box-shadow: inset 0 0 6px rgba(0,0,0,.12); 
         }
-        .side.left     { 
+        .side.left      { 
             width:var(--thk); 
             height:100%; 
             left:0;  
@@ -59,13 +59,13 @@
             transform-origin:right center; 
             border-radius:8px; 
         }
-        .side.top      { 
+        .side.top       { 
             height:var(--thk); 
             width:100%; 
             left:0;  
             top:0; 
             transform: rotateX( 90deg) translateZ(calc(50% - var(--thk)/2)); 
-            transform-origin:center top;   
+            transform-origin:center top;    
             border-radius:8px; 
             background: linear-gradient(90deg,#e5e7eb,#cbd5e1 60%,#94a3b8); 
         }
@@ -79,7 +79,7 @@
             border-radius:8px; 
             background: linear-gradient(90deg,#e5e7eb,#cbd5e1 60%,#94a3b8); 
         }
- 
+
         /* Balloon (avatar) + Modal */
         .float-badge { 
             position:fixed; 
@@ -118,7 +118,7 @@
             background: linear-gradient(180deg, rgba(255,255,255,.65), rgba(255,255,255,.35)); 
             backdrop-filter: blur(8px); 
         }
- 
+
         /* Zoom overlay */
         #zoomImg.fit   { 
             max-width:92vw; 
@@ -129,7 +129,7 @@
             max-width:none; 
             max-height:none; 
         }
- 
+
         /* Latar */
         body{background:linear-gradient(#f0f9ff,#ffffff)}
         .card{box-shadow:0 20px 50px rgba(2,132,199,.12),0 8px 20px rgba(15,23,42,.08)}
@@ -151,7 +151,7 @@
             font-size: 0.7rem;
             font-weight: 600;
         }
- 
+
         /* Kalkulator Styles */
         .calculator-section {
             background: white;
@@ -362,7 +362,7 @@
     </style>
 </head>
 <body class="antialiased text-slate-800">
- 
+
 <header class="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-slate-100">
     <nav class="container mx-auto px-4 py-3 flex items-center justify-between">
         <a href="#" class="flex items-center gap-3 font-semibold tracking-wide">
@@ -376,13 +376,13 @@
                  Takaful Prudential
             </span>
         </a>
- 
+
         <button id="menuBtn" class="lg:hidden p-2 rounded-lg border border-slate-200" aria-label="Menu">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
             </svg>
         </button>
- 
+
         <ul id="menu" class="hidden lg:flex items-center gap-6 text-sm">
             <li><a class="hover:text-sky-600" href="#sebutharga">Pelan</a></li>
             <li><a class="hover:text-sky-600" href="#manfaat">Manfaat</a></li>
@@ -392,7 +392,7 @@
         </ul>
     </nav>
 </header>
- 
+
 <section class="relative">
     <div class="absolute inset-0 -z-10"><div class="w-full h-full bg-gradient-to-b from-sky-200 to-white"></div></div>
     <div class="container mx-auto px-4 py-20 md:py-28">
@@ -406,76 +406,86 @@
         </div>
     </div>
 </section>
- 
+
 <section id="sebutharga" class="py-16 md:py-20 bg-slate-50">
     <div class="container mx-auto px-4">
         <div class="max-w-4xl mx-auto">
             <div class="text-center mb-10">
-                 <h2 class="text-2xl md:text-3xl font-semibold text-slate-900">Pilih Pelan Takaful Anda</h2>
-                 <p class="mt-2 text-slate-600">Semak pelan terbaik ikut bajet dan keperluan anda</p>
+                <h2 class="text-2xl md:text-3xl font-semibold text-slate-900">Pilih Pelan Takaful Anda</h2>
+                <p class="mt-2 text-slate-600">Semak pelan terbaik ikut bajet dan profil risiko pekerjaan anda</p>
             </div>
             
             <div class="calculator-section">
-                 <div class="grid md:grid-cols-3 gap-4 mb-6">
-                     <div class="form-group">
-                         <label for="plan-selector">1. Pilih Jenis Pelan:</label>
-                         <select id="plan-selector" class="w-full rounded-xl border border-slate-300 px-3 py-2">
-                             <option value="">-- Sila Pilih Jenis Pelan --</option>
-                             <option value="medikal-asas">Medical Card Sahaja</option>
-                             <option value="medikal-hibah">Medical Card + Hibah</option>
-                             <option value="hibah-sahaja">Hibah Sahaja</option>
-                         </select>
-                     </div>
- 
-                     <div class="form-group" id="plan-level-area" style="display: none;">
-                         <label for="plan-level-selector">2. Pilih Plan:</label>
-                         <select id="plan-level-selector" class="w-full rounded-xl border border-slate-300 px-3 py-2">
-                             <option value="">-- Sila Pilih Plan --</option>
-                             <option value="150">Plan 150</option>
-                             <option value="200">Plan 200</option>
-                             <option value="250">Plan 250</option>
-                             <option value="300">Plan 300</option>
-                             <option value="400">Plan 400</option>
-                         </select>
-                     </div>
- 
-                     <div class="form-group" id="hibah-type-area" style="display: none;">
-                         <label for="hibah-type-selector">2. Pilih Jenis Hibah:</label>
-                         <select id="hibah-type-selector" class="w-full rounded-xl border border-slate-300 px-3 py-2">
-                             <option value="">-- Sila Pilih Jenis --</option>
-                             <option value="biasa">Hibah Biasa</option>
-                             <option value="berganda">Hibah Berganda</option>
-                         </select>
-                     </div>
- 
-                     <div class="form-group" id="occupation-class-area" style="display: none;">
-                         <label for="occupation-class-selector">3. Pilih Kelas Pekerjaan:</label>
-                         <select id="occupation-class-selector" class="w-full rounded-xl border border-slate-300 px-3 py-2">
-                             <option value="">-- Sila Pilih Kelas --</option>
-                             <option value="1">Kelas 1 (Pejabat, Risiko Rendah)</option>
-                             <option value="2">Kelas 2 (Kerja Luar, Risiko Sederhana)</option>
-                             <option value="3">Kelas 3 (Kerja Manual, Risiko Tinggi)</option>
-                             <option value="4">Kelas 4 (Risiko Sangat Tinggi)</option>
-                         </select>
-                     </div>
-                 </div>
- 
-                 <div id="plan-details-output">
-                     <div class="placeholder-text">
-                         Sila buat pilihan anda dari menu di atas untuk melihat butiran penuh pelan dan harga.
-                     </div>
-                 </div>
+                <div class="grid md:grid-cols-3 gap-4 mb-6">
+                    <div class="form-group">
+                        <label for="plan-selector">1. Pilih Jenis Pelan:</label>
+                        <select id="plan-selector" class="w-full rounded-xl border border-slate-300 px-3 py-2">
+                            <option value="">-- Sila Pilih Jenis Pelan --</option>
+                            <option value="medikal-asas">Medical Card Sahaja</option>
+                            <option value="medikal-hibah">Medical Card + Hibah</option>
+                            <option value="hibah-sahaja">Hibah Sahaja</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="plan-level-area" style="display: none;">
+                        <label for="plan-level-selector">2. Pilih Plan:</label>
+                        <select id="plan-level-selector" class="w-full rounded-xl border border-slate-300 px-3 py-2">
+                            <option value="">-- Sila Pilih Plan --</option>
+                            <option value="150">Plan 150</option>
+                            <option value="200">Plan 200</option>
+                            <option value="250">Plan 250</option>
+                            <option value="300">Plan 300</option>
+                            <option value="400">Plan 400</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="hibah-type-area" style="display: none;">
+                        <label for="hibah-type-selector">2. Pilih Jenis Hibah:</label>
+                        <select id="hibah-type-selector" class="w-full rounded-xl border border-slate-300 px-3 py-2">
+                            <option value="">-- Sila Pilih Jenis --</option>
+                            <option value="biasa">Hibah Biasa</option>
+                            <option value="berganda">Hibah Berganda</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="occupation-class-area" style="display: none;">
+                        <label for="occupation-class-selector">3. Pilih Kategori/Kelas:</label>
+                        <select id="occupation-class-selector" class="w-full rounded-xl border border-slate-300 px-3 py-2">
+                            <option value="">-- Sila Pilih Kategori --</option>
+                            <option value="1">Kelas 1: Pejabat & Profesional</option>
+                            <option value="2">Kelas 2: Kerja Luar, Suri Rumah & Kanak-kanak</option>
+                            <option value="3">Kelas 3: Kerja Manual & Teknikal</option>
+                            <option value="4">Kelas 4: Industri Berat & Berisiko</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="class-info-box" class="hidden mb-6 p-4 bg-sky-50 border border-sky-200 rounded-xl text-sm text-slate-700">
+                    <div class="flex gap-3">
+                        <div class="text-2xl">ℹ️</div>
+                        <div>
+                            <h4 class="font-semibold text-sky-800 mb-1" id="class-info-title">Info Kelas</h4>
+                            <p id="class-info-desc">Penerangan kelas...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="plan-details-output">
+                    <div class="placeholder-text">
+                        Sila buat pilihan anda dari menu di atas untuk melihat butiran penuh pelan dan harga.
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </section>
- 
+
 <section id="manfaat" class="py-16 md:py-20">
     <div class="container mx-auto px-4">
         <div class="max-w-4xl mx-auto">
             <div class="text-center mb-12">
-                 <h2 class="text-2xl md:text-3xl font-semibold text-slate-900">Kenapa pilih Prudential Takaful?</h2>
-                 <p class="mt-3 text-slate-600">Fokus kami adalah untuk memastikan anda benar-benar memahami pelan yang dipilih, bukan sekadar mendaftar.</p>
+                <h2 class="text-2xl md:text-3xl font-semibold text-slate-900">Kenapa pilih Prudential Takaful?</h2>
+                <p class="mt-3 text-slate-600">Fokus kami adalah untuk memastikan anda benar-benar memahami pelan yang dipilih, bukan sekadar mendaftar.</p>
             </div>
             
             <details class="benefit-card">
@@ -561,7 +571,7 @@
                     </div>
                 </div>
             </details>
- 
+
         </div>
     </div>
 </section>
@@ -591,7 +601,7 @@
         </div>
     </div>
 </section>
- 
+
 <section id="hubungi" class="py-16 md:py-20 bg-slate-900 text-white">
     <div class="container mx-auto px-4">
         <div class="grid md:grid-cols-2 gap-8 items-center">
@@ -604,7 +614,7 @@
                  </div>
                  <p class="mt-4 text-xs text-white/70">Waktu respons: 8.00 pagi – 12.00 malam. Kecemasan: <a class="underline" href="tel:+601125517767">011-2551 7767</a></p>
             </div>
- 
+
             <form id="quickContactForm" class="bg-white text-slate-800 rounded-2xl p-6 shadow grid gap-4">
                  <div>
                      <label class="text-sm" for="fullName">Nama Penuh:</label>
@@ -624,13 +634,13 @@
         </div>
     </div>
 </section>
- 
+
 <footer class="py-8 border-t border-slate-100 text-center text-slate-500">
      © <span id="y"></span> Prudential Takaful. Hak cipta terpelihara.
 </footer>
- 
+
 <div id="plan-data-storage" style="display: none;">
- 
+
     <div data-plan-key="medikal-asas-150-1" data-price="RM 120 - RM 150 / bulan" data-popular="false">
         <ul>
             <li>Had Tahunan: RM 150,000</li>
@@ -676,7 +686,7 @@
             <li>Tiada Ko-Takaful</li>
         </ul>
     </div>
- 
+
     <div data-plan-key="medikal-asas-150-2" data-price="RM 140 - RM 170 / bulan" data-popular="false">
         <ul>
             <li>Had Tahunan: RM 150,000</li>
@@ -722,7 +732,7 @@
             <li>Tiada Ko-Takaful</li>
         </ul>
     </div>
- 
+
     <div data-plan-key="medikal-asas-150-3" data-price="RM 170 - RM 210 / bulan" data-popular="false">
         <ul>
             <li>Had Tahunan: RM 150,000</li>
@@ -768,7 +778,7 @@
             <li>Tiada Ko-Takaful</li>
         </ul>
     </div>
- 
+
     <div data-plan-key="medikal-asas-150-4" data-price="RM 220 - RM 270+ / bulan" data-popular="false">
         <ul>
             <li>Had Tahunan: RM 150,000</li>
@@ -819,7 +829,7 @@
             <li>(Anggaran untuk Kelas 4, Perlu Semakan)</li>
         </ul>
     </div>
- 
+
     <div data-plan-key="medikal-hibah-150-1" data-price="RM 200 - RM 240 / bulan" data-popular="false">
         <ul>
             <li>Medical Card (Had RM 150,000)</li>
@@ -860,7 +870,7 @@
             <li>Kemalangan + Elaun Hospital</li>
         </ul>
     </div>
- 
+
     <div data-plan-key="medikal-hibah-150-2" data-price="RM 230 - RM 270 / bulan" data-popular="false">
         <ul>
             <li>Medical Card (Had RM 150,000)</li>
@@ -901,7 +911,7 @@
             <li>Kemalangan + Elaun Hospital</li>
         </ul>
     </div>
- 
+
     <div data-plan-key="medikal-hibah-150-3" data-price="RM 270 - RM 320 / bulan" data-popular="false">
         <ul>
             <li>Medical Card (Had RM 150,000)</li>
@@ -942,7 +952,7 @@
             <li>Kemalangan + Elaun Hospital</li>
         </ul>
     </div>
-     
+    
     <div data-plan-key="medikal-hibah-150-4" data-price="RM 330 - RM 390+ / bulan" data-popular="false">
         <ul>
             <li>Medical Card (Had RM 150,000)</li>
@@ -988,7 +998,7 @@
             <li>(Anggaran untuk Kelas 4, Perlu Semakan)</li>
         </ul>
     </div>
- 
+
     <div data-plan-key="hibah-sahaja-biasa-1" data-price="RM 80 - RM 120 / bulan" data-popular="false">
         <ul>
             <li>Perlindungan Hibah Biasa</li>
@@ -1025,7 +1035,7 @@
             <li>(Anggaran untuk Kelas 4, Perlu Semakan)</li>
         </ul>
     </div>
- 
+
     <div data-plan-key="hibah-sahaja-berganda-1" data-price="RM 110 - RM 150 / bulan" data-popular="false">
         <ul>
             <li>Perlindungan Hibah Berganda</li>
@@ -1070,9 +1080,9 @@
             <li>(Anggaran untuk Kelas 4, Perlu Semakan)</li>
         </ul>
     </div>
-     
+    
 </div>
- 
+
 <div id="bc-badge" class="float-badge" style="bottom:22px; right:18px;">
     <div class="speech hidden sm:block">Tanya saya 🚀</div>
     <button class="relative w-14 h-14 rounded-full ring-4 ring-white shadow-lg overflow-hidden focus:outline-none focus:ring-4 focus:ring-sky-300" aria-label="Buka kad bisnes">
@@ -1080,7 +1090,7 @@
         <span class="absolute inset-0 rounded-full animate-ping bg-sky-500/25"></span>
     </button>
 </div>
- 
+
 <div id="bc-overlay" class="hidden fixed inset-0 z-[80] bg-black/40 backdrop-blur-sm"></div>
 <div id="bc-modal" class="hidden fixed inset-0 z-[90] p-4 grid place-items-center">
     <div class="glass rounded-2xl border border-white/30 shadow-2xl p-5 w-full max-w-xl relative">
@@ -1103,7 +1113,7 @@
         </div>
     </div>
 </div>
- 
+
 <div id="zoomOverlay" class="hidden fixed inset-0 z-[100] bg-black/80">
     <div id="zoomScroll" class="w-full h-full overflow-auto flex items-center justify-center p-4">
         <img id="zoomImg" class="fit select-none" src="" alt="Zoomed Image">
@@ -1113,11 +1123,11 @@
         <button id="zoomClose" class="px-3 py-1 rounded-lg bg-white/90 text-slate-800 text-sm">Close</button>
     </div>
 </div>
- 
+
 <script>
     // Tahun footer
     document.getElementById('y').textContent = new Date().getFullYear();
- 
+
     // Menu mobile
     const menuBtn = document.getElementById('menuBtn');
     const menuEl  = document.getElementById('menu');
@@ -1127,29 +1137,31 @@
             a.addEventListener('click', () => menuEl.classList.add('hidden'))
         );
      }
- 
+
     // Kalkulator Functionality - Updated for new plan structure
     function clearDetails() {
         const outputArea = document.getElementById('plan-details-output');
         outputArea.innerHTML = '<div class="placeholder-text">Sila buat pilihan anda dari menu di atas untuk melihat butiran penuh pelan dan harga.</div>';
         outputArea.classList.remove('active', 'popular'); 
      }
- 
+
     function updateInputVisibility() {
         const selectedPlan = document.getElementById('plan-selector').value;
         const planLevelArea = document.getElementById('plan-level-area');
-        const hibahTypeArea = document.getElementById('hibah-type-area'); // New
+        const hibahTypeArea = document.getElementById('hibah-type-area'); 
         const occArea = document.getElementById('occupation-class-area');
+        const classInfoBox = document.getElementById('class-info-box'); // Get Info Box
         
         // Reset all secondary dropdowns
         document.getElementById('plan-level-selector').value = '';
-        document.getElementById('hibah-type-selector').value = ''; // New
+        document.getElementById('hibah-type-selector').value = ''; 
         document.getElementById('occupation-class-selector').value = '';
         
         planLevelArea.style.display = 'none';
-        hibahTypeArea.style.display = 'none'; // New
+        hibahTypeArea.style.display = 'none'; 
         occArea.style.display = 'none';
- 
+        classInfoBox.classList.add('hidden'); // Hide info box on reset
+
         if (selectedPlan) {
             occArea.style.display = 'block'; // Occupation always shows if a plan is selected
             
@@ -1164,38 +1176,71 @@
         
         clearDetails();
      }
- 
+
+    // Data Deskripsi Kelas Pekerjaan (Untuk rujukan user)
+    const classDescriptions = {
+        '1': {
+            title: "Kelas 1: Pejabat & Profesional",
+            desc: "Untuk mereka yang bekerja dalam pejabat sahaja, kerja pentadbiran, atau profesional yang tidak melibatkan kerja manual. <br><strong>Contoh:</strong> Akauntan, Guru, Doktor (Klinik), Peguam, Admin."
+        },
+        '2': {
+            title: "Kelas 2: Kerja Luar, Kanak-kanak & Tidak Bekerja",
+            desc: "Untuk kerja melibatkan perjalanan/penyeliaan, atau golongan yang tidak bekerja. <br><strong>Termasuk:</strong> <u>Bayi & Kanak-kanak</u>, Suri Rumah, Pesara, Orang Menganggur, Jurujual (Sales).<br><br><span class='text-amber-600 font-bold'>⚠️ Nota Penting (Baby):</span> Untuk bayi bawah 1 tahun (Fragile Age), permohonan tertakluk kepada penilaian kesihatan yang lebih ketat."
+        },
+        '3': {
+            title: "Kelas 3: Kerja Manual Ringan / Teknikal",
+            desc: "Untuk pekerjaan yang melibatkan penggunaan peralatan, mesin ringan, atau kerja fizikal yang kerap. <br><strong>Contoh:</strong> Mekanik, Juruteknik, Pemandu Grab/Lori ringan, Tukang Masak, Operator Kilang."
+        },
+        '4': {
+            title: "Kelas 4: Kerja Berat / Berisiko Tinggi",
+            desc: "Untuk pekerjaan yang melibatkan jentera berat, ketinggian, atau persekitaran berbahaya. <br><strong>Contoh:</strong> Buruh Binaan, Pekerja Offshore, Polis/Tentera (Unit Khas)."
+        }
+    };
+
     function displayPlanDetails() {
         const selectedPlan = document.getElementById('plan-selector').value;
         const selectedPlanLevel = document.getElementById('plan-level-selector').value;
-        const selectedHibahType = document.getElementById('hibah-type-selector').value; // New
+        const selectedHibahType = document.getElementById('hibah-type-selector').value; 
         const selectedOccClass = document.getElementById('occupation-class-selector').value;
+        
         const outputArea = document.getElementById('plan-details-output');
+        const classInfoBox = document.getElementById('class-info-box');
+        const classInfoTitle = document.getElementById('class-info-title');
+        const classInfoDesc = document.getElementById('class-info-desc');
         
         clearDetails();
- 
+
+        // Update Info Box Kelas Pekerjaan
+        if (selectedOccClass && classDescriptions[selectedOccClass]) {
+            classInfoBox.classList.remove('hidden');
+            classInfoTitle.innerHTML = classDescriptions[selectedOccClass].title;
+            classInfoDesc.innerHTML = classDescriptions[selectedOccClass].desc;
+        } else {
+            classInfoBox.classList.add('hidden');
+        }
+
         let dataKey = "";
         let fullPlanName = "";
         let planNameOption = null;
- 
+
         if (!selectedPlan) { return; }
         
         planNameOption = document.querySelector(`#plan-selector option[value="${selectedPlan}"]`).textContent;
- 
+
         if (!selectedOccClass) {
-            outputArea.innerHTML = `<div class="placeholder-text">Sila pilih Kelas Pekerjaan anda.</div>`;
+            outputArea.innerHTML = `<div class="placeholder-text">Sila pilih Kategori/Kelas Pekerjaan anda.</div>`;
             return;
         }
- 
+
         if (selectedPlan === 'hibah-sahaja') {
-            if (!selectedHibahType) { // New check
+            if (!selectedHibahType) { 
                  outputArea.innerHTML = `<div class="placeholder-text">Sila pilih Jenis Hibah anda.</div>`;
                  return;
             }
-            dataKey = `${selectedPlan}-${selectedHibahType}-${selectedOccClass}`; // Updated dataKey
+            dataKey = `${selectedPlan}-${selectedHibahType}-${selectedOccClass}`; 
             const hibahTypeOption = document.querySelector(`#hibah-type-selector option[value="${selectedHibahType}"]`).textContent;
-            fullPlanName = `${planNameOption} - ${hibahTypeOption} (Kelas ${selectedOccClass})`; // Updated name
- 
+            fullPlanName = `${planNameOption} - ${hibahTypeOption} (Kelas ${selectedOccClass})`; 
+
         } else {
             if (!selectedPlanLevel) {
                  outputArea.innerHTML = `<div class="placeholder-text">Sila pilih plan untuk melihat butiran.</div>`;
@@ -1204,27 +1249,27 @@
             dataKey = `${selectedPlan}-${selectedPlanLevel}-${selectedOccClass}`;
             fullPlanName = `${planNameOption} - Plan ${selectedPlanLevel} (Kelas ${selectedOccClass})`;
         }
- 
+
         const planDataContainer = document.querySelector(`div[data-plan-key="${dataKey}"]`);
- 
+
         if (planDataContainer) {
             const price = planDataContainer.getAttribute('data-price');
             const isPopular = planDataContainer.getAttribute('data-popular') === 'true';
- 
+
             let content = `
-                 <div class="plan-card ${isPopular ? 'popular' : ''}">
-                     <h3 class="text-xl font-semibold">${fullPlanName}</h3>
-                     <div class="plan-price">${price}</div>
-                     <ul class="plan-features">
+                <div class="plan-card ${isPopular ? 'popular' : ''}">
+                    <h3 class="text-xl font-semibold">${fullPlanName}</h3>
+                    <div class="plan-price">${price}</div>
+                    <ul class="plan-features">
                         ${planDataContainer.querySelector('ul').innerHTML}
-                     </ul>
-                     <p class="text-xs text-slate-500 italic mt-4 mb-4">
-                         *Harga yang dipaparkan adalah anggaran sahaja. Sebut harga rasmi akan disediakan oleh ejen.
-                     </p>
-                     <button class="select-btn ${isPopular ? 'popular-btn' : ''}" onclick="selectPlan('${dataKey}')">Pilih Pelan Ini</button>
-                 </div>
+                    </ul>
+                    <p class="text-xs text-slate-500 italic mt-4 mb-4">
+                        *Harga yang dipaparkan adalah anggaran mengikut kelas pekerjaan. Sebut harga rasmi tertakluk kepada underwriting.
+                    </p>
+                    <button class="select-btn ${isPopular ? 'popular-btn' : ''}" onclick="selectPlan('${dataKey}')">Pilih Pelan Ini</button>
+                </div>
             `;
- 
+
             outputArea.innerHTML = content;
             outputArea.classList.add('active');
             if (isPopular) {
@@ -1234,7 +1279,7 @@
             outputArea.innerHTML = `<div class="placeholder-text">Butiran Pelan untuk kombinasi ini belum tersedia. Sila hubungi ejen.</div>`;
         }
      }
- 
+
     function selectPlan(planKey) {
         const planDataContainer = document.querySelector(`div[data-plan-key="${planKey}"]`);
         if (planDataContainer) {
@@ -1245,30 +1290,30 @@
             sessionStorage.setItem('selectedPlan', planKey);
         }
      }
- 
+
     // Initialize calculator
     document.addEventListener('DOMContentLoaded', () => {
         const contactForm = document.getElementById('quickContactForm');
         
         const planSelector = document.getElementById('plan-selector');
         const planLevelSelector = document.getElementById('plan-level-selector');
-        const hibahTypeSelector = document.getElementById('hibah-type-selector'); // New
+        const hibahTypeSelector = document.getElementById('hibah-type-selector'); 
         const occClassSelector = document.getElementById('occupation-class-selector');
- 
+
         planSelector.addEventListener('change', () => {
             updateInputVisibility();
             displayPlanDetails(); 
         });
- 
+
         planLevelSelector.addEventListener('change', displayPlanDetails);
-        hibahTypeSelector.addEventListener('change', displayPlanDetails); // New
+        hibahTypeSelector.addEventListener('change', displayPlanDetails); 
         occClassSelector.addEventListener('change', displayPlanDetails);
- 
+
         const myWhatsAppNumber = '601125517767';
- 
+
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
- 
+
             const name = document.getElementById('fullName').value;
             const dob = document.getElementById('birthDate').value;
             const occupation = document.getElementById('occupation').value;
@@ -1276,8 +1321,8 @@
             const selectedOccClass = occClassSelector.value;
             const selectedPlan = planSelector.value;
             const selectedPlanLevel = planLevelSelector.value;
-            const selectedHibahType = hibahTypeSelector.value; // New
- 
+            const selectedHibahType = hibahTypeSelector.value; 
+
             let planDetails = "Tiada pilihan pelan dibuat.";
             
             if (selectedPlan) {
@@ -1291,7 +1336,7 @@
                          planDetails = `Pilihan Pelan: ${planNameOption} (Kelas ${selectedOccClass}) - (Jenis Hibah belum dipilih)`;
                      } else {
                          const hibahTypeOption = document.querySelector(`#hibah-type-selector option[value="${selectedHibahType}"]`).textContent;
-                         planDetails = `Pilihan Pelan: ${planNameOption} - ${hibahTypeOption} (Kelas ${selectedOccClass})`; // Updated
+                         planDetails = `Pilihan Pelan: ${planNameOption} - ${hibahTypeOption} (Kelas ${selectedOccClass})`; 
                      }
                  } 
                  else if (selectedPlanLevel) {
@@ -1303,35 +1348,35 @@
             }
             
             const message = `Salam.
- 
+
 Saya *${name}* berminat dengan pelan Takaful.
- 
+
 *Maklumat Saya:*
 Tarikh Lahir: ${dob}
 Pekerjaan: ${occupation}
- 
+
 *Pelan Dipilih:*
 ${planDetails}
- 
+
 Harap dapat hubungi saya segera. Terima kasih.`;
- 
+
             const encodedMessage = encodeURIComponent(message);
             const whatsappURL = `https://wa.me/${myWhatsAppNumber}?text=${encodedMessage}`;
             window.open(whatsappURL, '_blank');
- 
+
             contactForm.reset();
             planSelector.value = '';
             updateInputVisibility();
             clearDetails();
         });
     });
- 
+
     // 3D Card Functionality
     const badge    = document.getElementById('bc-badge');
     const overlay = document.getElementById('bc-overlay');
     const modal   = document.getElementById('bc-modal');
     const closeX  = document.getElementById('bc-close');
- 
+
     function openModal(){ 
         if (overlay) overlay.classList.remove('hidden'); 
         if (modal) modal.classList.remove('hidden'); 
@@ -1342,7 +1387,7 @@ Harap dapat hubungi saya segera. Terima kasih.`;
         if (overlay) overlay.classList.add('hidden'); 
         autoSpin(false);
      }
- 
+
     if (badge) badge.addEventListener('click', openModal);
     if (overlay) overlay.addEventListener('click', closeModal);
     if (closeX) closeX.addEventListener('click', closeModal);
@@ -1351,7 +1396,7 @@ Harap dapat hubungi saya segera. Terima kasih.`;
             closeModal();
         }
     });
- 
+
     const scene   = document.getElementById('scene');
     const card    = document.getElementById('card3d');
     const imgF    = document.getElementById('imgFront');
@@ -1360,9 +1405,9 @@ Harap dapat hubungi saya segera. Terima kasih.`;
     const backEl  = document.getElementById('backFace');
     const btnR    = document.getElementById('reset');
     const btnFlip = document.getElementById('flip');
- 
+
     let rotX=0, rotY=0, dragging=false, lastX=0, lastY=0, spinTimer=null, flipped=false;
- 
+
     function render(){ 
         if (!card) return;
         const viewY = flipped ? rotY + 180 : rotY; 
@@ -1400,7 +1445,7 @@ Harap dapat hubungi saya segera. Terima kasih.`;
         dragging=false; 
         card.classList.remove('is-dragging'); 
      }
-     
+      
     if (card) {
         card.addEventListener('mousedown', down); 
         card.addEventListener('touchstart', down, {passive:true});
@@ -1409,10 +1454,10 @@ Harap dapat hubungi saya segera. Terima kasih.`;
     window.addEventListener('touchmove', move, {passive:true});
     window.addEventListener('mouseup', up);  
     window.addEventListener('touchend', up);
- 
+
     if (btnFlip) btnFlip.addEventListener('click', ()=>{ flipped=!flipped; render(); });
     if (btnR) btnR.addEventListener('click', ()=>{ rotX=0; rotY=0; flipped=false; render(); autoSpin(true); });
- 
+
     function fitToImage(){
         if (!imgF || !scene || !card) return;
         const nw = imgF.naturalWidth, nh = imgF.naturalHeight;
@@ -1436,12 +1481,12 @@ Harap dapat hubungi saya segera. Terima kasih.`;
         render(); 
      }
      
-    if (_imgF_) {
-        if (_imgF_.complete) initCard();
-        else _imgF_.addEventListener('load', initCard);
+    if (imgF) {
+        if (imgF.complete) initCard();
+        else imgF.addEventListener('load', initCard);
      }
     window.addEventListener('resize', fitToImage);
- 
+
     // Zoom functionality
     const zoomOverlay = document.getElementById('zoomOverlay');
     const zoomImg     = document.getElementById('zoomImg');
@@ -1449,21 +1494,21 @@ Harap dapat hubungi saya segera. Terima kasih.`;
     const zoomClose   = document.getElementById('zoomClose');
     const zoomToggle  = document.getElementById('zoomToggle');
     let zoomMode='fit';
- 
+
     function openZoom(src){ 
         if (!zoomImg || !zoomOverlay || !zoomScroll) return;
-        _zoomImg_.src = src; 
+        zoomImg.src = src; 
         zoomMode='fit'; 
-        _zoomImg_.classList.remove('full'); 
-        _zoomImg_.classList.add('fit'); 
-        _zoomOverlay_.classList.remove('hidden'); 
+        zoomImg.classList.remove('full'); 
+        zoomImg.classList.add('fit'); 
+        zoomOverlay.classList.remove('hidden'); 
         autoSpin(false);
-        _zoomScroll_.scrollTop=0; 
-        _zoomScroll_.scrollLeft=0; 
+        zoomScroll.scrollTop=0; 
+        zoomScroll.scrollLeft=0; 
      }
     function closeZoom(){ 
         if (!zoomOverlay) return;
-        _zoomOverlay_.classList.add('hidden'); 
+        zoomOverlay.classList.add('hidden'); 
         if (modal && !modal.classList.contains('hidden')) {
             autoSpin(true);
         }
@@ -1472,30 +1517,30 @@ Harap dapat hubungi saya segera. Terima kasih.`;
         if (!zoomImg || !zoomToggle || !zoomScroll) return;
         if(zoomMode==='fit'){ 
             zoomMode='full'; 
-            _zoomImg_.classList.remove('fit'); 
-            _zoomImg_.classList.add('full'); 
-            _zoomToggle_.textContent='Fit'; 
+            zoomImg.classList.remove('fit'); 
+            zoomImg.classList.add('full'); 
+            zoomToggle.textContent='Fit'; 
         } else { 
             zoomMode='fit'; 
-            _zoomImg_.classList.remove('full'); 
-            _zoomImg_.classList.add('fit'); 
-            _zoomToggle_.textContent='100%'; 
-            _zoomScroll_.scrollTop=0; 
-            _zoomScroll_.scrollLeft=0; 
+            zoomImg.classList.remove('full'); 
+            zoomImg.classList.add('fit'); 
+            zoomToggle.textContent='100%'; 
+            zoomScroll.scrollTop=0; 
+            zoomScroll.scrollLeft=0; 
         } 
      }
- 
-    if (frontEl) frontEl.addEventListener('click', ()=>{ if(!dragging) openZoom(_imgF_.src); });
-    if (backEl) backEl.addEventListener('click', ()=>{ if(!dragging) openZoom(_imgB_.src); });
-    if (zoomClose) _zoomClose_.addEventListener('click', closeZoom);
-    if (zoomToggle) _zoomToggle_.addEventListener('click', toggleZoom);
-     
+
+    if (frontEl) frontEl.addEventListener('click', ()=>{ if(!dragging) openZoom(imgF.src); });
+    if (backEl) backEl.addEventListener('click', ()=>{ if(!dragging) openZoom(imgB.src); });
+    if (zoomClose) zoomClose.addEventListener('click', closeZoom);
+    if (zoomToggle) zoomToggle.addEventListener('click', toggleZoom);
+      
     document.addEventListener('keydown', (e)=>{ 
         if(zoomOverlay && !zoomOverlay.classList.contains('hidden') && e.key==='Escape') {
             closeZoom();
         }
     });
-    if (zoomOverlay) _zoomOverlay_.addEventListener('click', (e)=>{ 
+    if (zoomOverlay) zoomOverlay.addEventListener('click', (e)=>{ 
         if(e.target === zoomOverlay) closeZoom(); 
     });
 </script>
